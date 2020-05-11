@@ -1,42 +1,142 @@
-[![Build Status](https://travis-ci.org/github/training-kit.svg?branch=master)](https://travis-ci.org/github/training-kit)
+# GitHub-dan Git üçün yaddaş kitabçası
+## Git - kompüterinizdə GitHub ilə işləmək üçün istifadə olunan açıq mənbəli, versiyaların paylanmış nəzarət sistemidir. Bu kitabça, əmr sətri üçün əsas Git əmrləri və onların tətbiqi üzrə təlimatlardan ibarətdir.
 
-# GitHub Training Kit: Cheatsheets
+## Git quraşdırılması
+GitHub, repozitarla əsas əməliyyatların icra edilməsi üçün qrafik interfeysli bir pəncərə proqramı və genişləndirilmiş iş ssenariləri üçün Git-in avtomatik yenilənən konsol versiyasını təqdim edir.
 
-## We :heart: Contributors Like You!
+### Github Desktop
+[desktop.github.com](https://desktop.github.com)
 
-**We’re eager to work with you**, our user community, to improve these materials and develop new ones. Please check out our [CONTRIBUTING guide](https://github.com/github/training-kit/blob/master/CONTRIBUTING.md) for more information on getting started.
+Linux və POSIX sistemləri üçün Git distribusiyalarını Git SCM rəsmi saytında tapa bilərsiniz.
 
-## Looking for a resource that was once housed in training-kit?
+### Bütün platformalar üçün Git
+[git-scm.com](http://git-scm.com)
 
-This repository currently contains the Git and GitHub Cheatsheets. If you're looking for a project that used to be housed here, such as On-Demand training, reading lists, videos, and book recommendations, see [this commit](https://github.com/github/training-kit/tree/4fbf180e980ef973ba4cc4b8ef3d5f278ddc8c08) in the repository's history.
+## İlkin quraşdırma
+İstifadəçi haqqında informasiyanın bütün lokal repozitarlar üçün konfiqurasiyası
 
-## Projects Used in Training-Kit
+```$ git config --global user.name "[istifadəçi adı]"```
 
-- We use [Jekyll](https://jekyllrb.com/) and [Markdown](https://guides.github.com/features/mastering-markdown/).
-- Our content is styled using the [Primer CSS toolkit](https://github.com/primer/primer-css).
+Kommitlərinizdə müəllif sahəsində əks olunacaq adınızı təyin edir
 
-## Packaging for Viewing Behind Your Firewall
+```$ git config --global user.email "[e-poçt ünvanı]"```
 
-If you'd like to have a copy of the files to be served from a web server inside of your firewall, start by running `script/package`.
+Kommitlərinizin məlumat hissəsində əks olunacaq e-poçt ünvanınızı təyin edir
 
-1. Run `script/package` to create a release tarball. This will be in the format `release-XXXXXXX.tgz` for you to take wherever you want.
-2. To test this looks okay, create some folders `mkdir -p test_site/kit`.
-3. Untar the release, `tar -xzf release-XXXXXXX.tgz -C test_site/kit`.
-4. Switch into the test_site directory, `cd test_site`.
-5. View the site with `python -m SimpleHTTPServer`. _Note: Some servers are more advanced than others and can handle redirects, smart recognition of `.html` files, etc_
+```$ git config --global color.ui auto```
 
-## [Licenses](https://github.com/github/training-kit/blob/master/LICENSE)
+Əmr sətrinin çıxışının faydalı rənglənməsini aktiv edir
 
-Site content is licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/). CC-BY-4.0 gives you permission to use the content for almost any purpose but does not grant you any trademark permissions, so long as you note the license and give credit, such as follows:
+## Budaqlar
+Budaqlar - Git-lə işin mühüm hissəsidir. Etdiyiniz istənilən kommit hal-hazırda "giriş etmiş" olduğunuz budaqda ediləcək. Hansı budaqda olduğunuzu görmək üçün `git status` əmrindən istifadə edin.
 
-> Content based on
-> <a href="https://github.github.com/training-kit/">github.github.com/training-kit/</a>
-> used under the
-> <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
-> license.</a>
+```$ git branch [budaq-adı]```
 
-Code used to build and test the site as well as code samples on the site, if any, are licensed under [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode). CC0 waives all copyright restrictions but does not grant you any trademark permissions.
+Yeni budaq yaradır
 
-This means you can use the content and code in this repository except for GitHub trademarks in your projects.
+```$ git checkout [budaq-adı]```
 
-When you contribute to this repository you are doing so under the above licenses.
+Göstərilən budağa keçir və iş qovluğunu yeniləyir
+
+```$ git merge [budaq-adı]```
+
+Göstərilən budağın tarixini cari budaqla birləşdirir. Bu, ümumiyyətlə dəyişikliklərin qəbul edilməsi sorğularında istifadə olunur, lakin vacib bir Git əməliyyatıdır.
+
+```$ git branch -d [budaq-adı]```
+
+Göstərilən budağı silir
+
+
+## Repozitarın yaradılması
+
+Yeni bir repozitar ilə işə başlamaq üçün, bunu ya lokalda yaradıb sonra GitHub-a göndərməli və ya mövcud repozitarı klonlaşdırmalısınız. Hər repozitar üçün bu əməliyyatı sadəcə bir dəfə edəcəksiz.
+
+```$ git init```
+
+Mövcud bir qovluğu Git repozitarına çevirir
+
+```$ git clone [url]```
+
+GitHub-da mövcud olan repozitarı, bütün faylları, budaqları və kommitləri daxil olmaqla klonlaşdırır (yükləyir).
+
+## .gitignore faylı
+Bəzən, müəyyən faylları Git tərəfindən izlənmədən istisna etmək əlverişli ola bilər. Bu istisnalar adətən `.gitignore` adlanan xüsusi faylda yazılaraq təyin edilir. `.gitignore` faylları üçün faydalı şablonları [github.com/github/gitignore](https://github.com/github/gitignore) ünvanında tapa bilərsiniz.
+
+## Dəyişikliklərin sinxronizasiyası
+
+Lokal repozitarınızı Github.com-da olan repozitarınız ilə sinxronlaşdırın
+
+```$ git fetch```
+
+GitHub-da mövcud olan repozitarın bütün tarixçəsini yükləyir
+
+```$ git merge```
+
+GitHub-da mövcud olan repozitarı cari budaqla birləşdirir
+
+```$ git push```
+
+Lokal budaqda olan bütün kommitləri Github repozitarına göndərir
+
+```$ git pull```
+
+Cari işlək lokal budağı müvafiq Github budağından gələn bütün yeni kommitlərlə yeniləyir. `git pull` - `git fetch` və `git merge` əmrlərinin kombinasiyasıdır
+
+
+## Dəyişikliklər edin
+Dəyişikliklərə baxış və kommitlərin yaradılması
+
+```$ git status```
+
+Bütün yeni və ya dəyişdirilmiş faylların siyahısını sadalayır
+
+```$ git log```
+
+Cari budaq üçün versiya tarixini siyahılayır
+
+```$ git log --follow [fayl]```
+
+Bir fayl üçün ad dəyişmələri də daxil olmaqla versiya tarixini siyahılayır
+
+```$ git diff [birinci-budaq]...[ikinci-budaq]```
+
+İki budaq arasındakı məzmun fərqlərini göstərir
+
+```$ git show [commit]```
+
+Müəyyən bir kommit üçün metadata və məzmun dəyişikliklərini göstərir
+
+```$ git add [file]```
+
+Göstərilən faylı sonrakı əməliyyatlar üçün indeksləyir
+
+```$ git commit -m "[izahlı mesaj]"```
+
+İndekslənmiş dəyişiklikləri versiya tarixinə yazır
+
+## Kommitlərin geri qaytarılması
+
+Səhvlərin silinməsi və tarixin tənzimlənməsi
+
+```$ git reset [kommit]```
+
+Bütün dəyişiklikləri işçi qovluğunda saxlayaraq, göstərilən `[commit]`-dən sonrakı kommitlərin hamısını ləğv edir. 
+
+```$ git reset --hard [kommit]```
+
+Bütün tarixi, işçi qovluğu daxil olmaqla ləğv edir və göstərilən kommitə qaytarır.
+
+> DİQQƏT! Tarixi dəyişdirmək xoşagəlməz yan təsirlərə səbəb ola bilər. GitHub-da mövcud olan kommitləri dəyişdirərkən ehtiyatlı olun. Əgər köməyə ehtiyacınız varsa, github.community və ya dəstəklə əlaqə saxlayın.
+
+
+## Lüğət
+
+- **git**: açıq mənbəli, versiyaların paylanmış nəzarət sistemidir
+- **GitHub**: git repozitarlarına ev sahibliyi və əməkdaşlıq üçün platformadır
+- **commit**: bir Git obyekti, repozitarınızın SHA alqoritmi ilə sıxılmış bir görüntüsüdür
+- **branch** (budaq): kommitlər üçün yüngül daşına bilən bir göstəricidir
+- **clone**: bütün kommit və budaqları da daxil olmaqla bir repozitarın lokal bir versiyasıdır
+- **remote** (məsafədən idarə olunan): GitHub-da bütün komanda üzvlərinin istifadə etdikləri ümumi bir repozitardır
+- **fork** (nüsxə): GitHub-dakı fərqli istifadəçiyə məxsus bir repozitar nüsxəsidir
+- **pull request** (dəyişikliklərin qəbul edilməsi sorğusu): bir budaqda təqdim olunan fərqləri müqayisə və rəylər, şərhlər, inteqrasiya olunmuş testlər və s. ilə müzakirə etmək üçün bir yer
+- **HEAD**: cari işlədiyiniz qovluğu təmsil edir. HEAD göstəricisi `git checkout` istifadə edilərkən müxtəlif budaqlara köçürülə bilər.
